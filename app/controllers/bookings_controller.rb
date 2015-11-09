@@ -6,7 +6,9 @@ class BookingsController < ApplicationController
       booking.save
       redirect_to clown_path booking.clown
     else
-      redirect_to root_path
+      @clown = booking.clown
+      @booking = booking
+      render 'clowns/show'
     end
   end
 

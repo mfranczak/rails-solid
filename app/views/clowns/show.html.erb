@@ -1,5 +1,23 @@
 <h1><%= @clown.name %></h1>
 
+<% # [DL] Demeter Law is violated here. %>
+<% # We can fix the problem using Decorator pattern and delegates %>
+<% if @clown.bookings.count > 0 %>
+    <p>Last booking: <%= @clown.bookings.last.created_at.strftime('%e.%-m.%Y') %></p>
+<% end %>
+
+<% if @clown.ranking_data %>
+<ul>
+  <li>Points: <%= @clown.ranking_data.points %></li>
+  <li>Bookings: <%= @clown.ranking_data.bookings %></li>
+</ul>
+<% else %>
+<ul>
+  <li>Points: <%= (@clown.contract.to_sym == :student ? '10' : '0') %></li>
+  <li>Bookings: 0</li>
+</ul>
+<% end %>
+
 <h2>Book a clown</h2>
 
 <%= simple_form_for @booking do |f| %>
