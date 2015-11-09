@@ -12,10 +12,6 @@ class Clown < ActiveRecord::Base
     Booking.where(appointment_date: date, appointment_time: time, clown: self).count > 0
   end
 
-  def last_booking
-    bookings.last.created_at
-  end
-
   # [LSP] This method is not a correct substitute for RankingData module.
   # RankingData#ranking_data returns Ranking object when bookings.empty? method returns false which is Boolean
   # Therefore a condition was implemented in the views
@@ -25,5 +21,29 @@ class Clown < ActiveRecord::Base
   #   - Remove the condition from views: clowns/show.html.erb
   def ranking_data
     super unless bookings.empty?
+  end
+
+  # Duplicate code:
+  # Use method missing or class eval to apply meta programming
+  # ----------------------------------------------------------
+  # self.instance_eval do
+  #   Clown::CONTRACTS.each do |available_contract|
+  #     method_name = "is_#{available_contract}?"
+  #     define_method method_name.to_sym do
+  #       contract.to_sym == available_contract
+  #     end
+  #   end
+  # end
+
+  def is_student?
+    contract.to_sym == :student
+  end
+
+  def is_fulltime?
+    contract.to_sym == :fulltime
+  end
+
+  def is_parttime?
+    contract.to_sym == :parttime
   end
 end

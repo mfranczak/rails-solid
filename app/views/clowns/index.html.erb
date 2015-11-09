@@ -5,7 +5,10 @@
 <% @clowns.each do |clown| %>
     <li>
       <a href="<%= clown_path clown %>">
-        <%= clown.name %> | <%= clown.contract %>
+        <%= clown.name %>
+        <% if clown.is_student? %>
+            [student]
+        <% end %>
       </a>
     </li>
 <% end %>

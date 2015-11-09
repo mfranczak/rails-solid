@@ -6,6 +6,7 @@
     <p>Last booking: <%= @clown.bookings.last.created_at.strftime('%e.%-m.%Y') %></p>
 <% end %>
 
+<% # [LSP] Remove the conditions once Clown#ranking_data is fixed %>
 <% if @clown.ranking_data %>
 <ul>
   <li>Points: <%= @clown.ranking_data.points %></li>
@@ -13,7 +14,7 @@
 </ul>
 <% else %>
 <ul>
-  <li>Points: <%= (@clown.contract.to_sym == :student ? '10' : '0') %></li>
+  <li>Points: <%= (@clown.is_student? ? '10' : '0') %></li>
   <li>Bookings: 0</li>
 </ul>
 <% end %>
