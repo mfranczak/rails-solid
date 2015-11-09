@@ -1,0 +1,12 @@
+<h1>Clowns#index</h1>
+<p>Find me in app/views/clowns/index.html.erb</p>
+
+<ul>
+<% @clowns.each do |clown| %>
+    <li>
+      <a href="<%= clown_path clown %>">
+        <%= clown.name %>
+      </a>
+    </li>
+<% end %>
+</ul>
