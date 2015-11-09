@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  appointment_date: 
+  appointment_time: 
+  clown_id: 
+
+two:
+  appointment_date: 
+  appointment_time: 
+  clown_id: 
