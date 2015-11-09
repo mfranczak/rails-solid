@@ -1,2 +1,10 @@
 <h1><%= @clown.name %></h1>
-<p>Find me in app/views/clowns/show.html.erb</p>
+
+<h2>Book a clown</h2>
+
+<%= simple_form_for @booking do |f| %>
+    <%= f.input :appointment_date %>
+    <%= f.input :appointment_time, as: :select, collection: Booking::APPOINTMENT_TIME %>
+    <%= f.input :clown_id, as: :hidden %>
+    <%= f.submit %>
+<% end %>
