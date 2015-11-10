@@ -2,7 +2,7 @@
 
 <% # [DL] Demeter Law is violated here. %>
 <% # We can fix the problem using Decorator pattern and delegates %>
-<% if @clown.bookings.count > 0 %>
+<% unless @clown.bookings.empty? %>
     <p>Last booking: <%= @clown.bookings.last.created_at.strftime('%e.%-m.%Y') %></p>
 <% end %>
 
