@@ -1,15 +1,13 @@
-<h1>Clowns#index</h1>
-<p>Find me in app/views/clowns/index.html.erb</p>
+<h1 class="cover-heading">Choose the best clown for your party</h1>
 
-<ul>
+<div class="clowns-index">
 <% @clowns.each do |clown| %>
-    <li>
-      <a href="<%= clown_path clown %>">
-        <%= clown.name %>
-        <% if clown.is_student? %>
-            [student]
-        <% end %>
-      </a>
-    </li>
+    <a href="<%= clown_path clown %>" >
+      <img src="<%= clown.image %>" alt="<%= clown.name %>" class="img-circle <%= clown.contract %>"
+           data-toggle="tooltip" data-placement="bottom" title="<%= clown.name %>" />
+    </a>
 <% end %>
-</ul>
+</div>
+
+<script type="text/javascript">
+</script>

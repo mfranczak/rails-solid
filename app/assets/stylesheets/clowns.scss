@@ -1,3 +1,42 @@
 // Place all the styles related to the clowns controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.clowns-index {
+  margin-top: 45px;
+}
+
+div.clowns-index p a {
+  font-size: 16px;
+  line-height: 32px;
+}
+
+select#booking_appointment_time {
+  width: 50%;
+  max-width: 230px;
+  min-width: 100px;
+  margin: 0 auto;
+}
+
+.img-circle {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.circle-l {
+  width: 200px;
+  height: 200px;
+}
+
+a img.img-circle {
+  border: 2px solid rgba(255,255,255,0.5)
+}
+
+a:hover img.img-circle {
+  border: 2px solid rgba(255,255,255,1)
+}
+
+a img.student {
+  border-color: darkred;
+}

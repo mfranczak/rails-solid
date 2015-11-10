@@ -4,7 +4,7 @@ class Booking < ActiveRecord::Base
 
   belongs_to :clown
 
-  validates :appointment_time, inclusion: { in: Booking::APPOINTMENT_TIME }
+  validates :appointment_time, presence: true, inclusion: { in: Booking::APPOINTMENT_TIME }
   validates :clown, presence: true
   validates :appointment_date, presence: true
 
@@ -34,7 +34,7 @@ class Booking < ActiveRecord::Base
     end
 
     if appointment_day >= max_per_day
-      errors.add :appointment_date, 'This clown can not have more appointments'
+      errors.add :appointment_date, 'This clown can not have more appointments. Try to change the date.'
     end
   end
 

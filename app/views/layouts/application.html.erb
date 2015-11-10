@@ -7,8 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">
+                <a href="<%= clowns_path %>">SolidClowns</a>
+              </h3>
+            </div>
+          </div>
 
-<%= yield %>
+          <div class="inner cover">
+            <% flash.each do |klass, message| %>
+                <div class="alert alert-<%= klass %>" role="alert"><%= message %></div>
+            <% end %>
 
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

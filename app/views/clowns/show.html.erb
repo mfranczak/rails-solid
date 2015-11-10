@@ -1,29 +1,41 @@
-<h1><%= @clown.name %></h1>
+<img src="<%= @clown.image %>" class="img-circle circle-l" alt="<%= @clown.name %>">
+
+<h1>
+  <%= @clown.name %>
+</h1>
+
+<% if @clown.is_student? %>
+<p>
+    <span class="label label-info">student</span>
+</p>
+<% end %>
+
 
 <% # [DL] Demeter Law is violated here. %>
 <% # We can fix the problem using Decorator pattern and delegates %>
 <% unless @clown.bookings.empty? %>
-    <p>Last booking: <%= @clown.bookings.last.created_at.strftime('%e.%-m.%Y') %></p>
+    <p>Last booking was on <%= @clown.bookings.last.created_at.strftime('%e.%-m.%Y') %></p>
 <% end %>
 
 <% # [LSP] Remove the conditions once Clown#ranking_data is fixed %>
 <% if @clown.ranking_data %>
-<ul>
-  <li>Points: <%= @clown.ranking_data.points %></li>
-  <li>Bookings: <%= @clown.ranking_data.bookings %></li>
+<p>Points <span class="badge"><%= @clown.ranking_data.points %></p>
+<p>Bookings <span class="badge"><%= @clown.ranking_data.bookings %></p>
 </ul>
 <% else %>
-<ul>
-  <li>Points: <%= (@clown.is_student? ? '10' : '0') %></li>
-  <li>Bookings: 0</li>
-</ul>
+    <p>Points <span class="badge"><%= (@clown.is_student? ? '10' : '0') %></span></p>
+    <p>Bookings <span class="badge">0</span></p>
 <% end %>
 
-<h2>Book a clown</h2>
+<hl/>
+
+<span class="separator"></span>
+
+<h3>Book this clown</h3>
 
 <%= simple_form_for @booking do |f| %>
     <%= f.input :appointment_date %>
     <%= f.input :appointment_time, as: :select, collection: Booking::APPOINTMENT_TIME %>
     <%= f.input :clown_id, as: :hidden %>
-    <%= f.submit %>
+    <%= f.submit 'Book', {class: 'btn btn-default'} %>
 <% end %>

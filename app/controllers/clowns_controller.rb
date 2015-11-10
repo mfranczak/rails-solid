@@ -8,6 +8,7 @@ class ClownsController < ApplicationController
       @clown = Clown.find params[:id]
       @booking = Booking.new clown: @clown
     rescue ActiveRecord::RecordNotFound
+      flash[:warning] = 'Clown was not found'
       redirect_to clowns_path
     end
   end
