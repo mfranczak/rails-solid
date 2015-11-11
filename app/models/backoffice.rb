@@ -9,6 +9,33 @@
 #        apply some meta programming techniques
 
 module Backoffice
-  extend Costume
-  extend Certificate
+  # this method prepares a confirmation certificate for the clown
+  def certificate_prepare(booking)
+    call_api :certificate_prepare, booking
+  end
+
+  # this method sends a confirmation certificate
+  def certificate_send(booking)
+    call_api :certificate_send, booking
+  end
+
+  # this method sends a request to borrow a costume for the clown
+  def costume_borrow(booking)
+    call_api :costume_borrow, booking
+  end
+
+  # informs that costume was returned
+  def costume_return(booking)
+    call_api :costume_return, booking
+  end
+
+  # informs that costume was returned
+  def costume_mark_as_broken(booking)
+    call_api :costume_mark_as_broken, booking
+  end
+
+  def call_api(method, booking)
+    # does an api call
+    true
+  end
 end
