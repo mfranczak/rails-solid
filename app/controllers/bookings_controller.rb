@@ -1,9 +1,25 @@
 class BookingsController < ApplicationController
+  include Backoffice
+
   def create
     booking = Booking.new booking_params
 
     if booking.valid?
       booking.save
+
+      # [DIP] Instead of using a case here we can inject a strategy determined by the type of contract
+      # To fix:
+      #   - use the ActiveRecord after_create hook: http://guides.rubyonrails.org/active_record_callbacks.html
+      #   - create classes AfterBooking#{@clown.contract} which respond to #after_booking(booking) and wraps the algorithm
+      #   - each AfterBooking#{@clown.contract} should include the min. amount of methods
+      case booking.clown.contract.to_sym
+        when :student
+          costume_borrow booking
+          certificate_prepare booking
+        when :parttime
+          costume_borrow booking
+      end
+
       flash[:success] = "#{booking.clown.name} is now booked for your party"
       redirect_to clown_path booking.clown
     else
