@@ -10,10 +10,11 @@
 </p>
 <% end %>
 
+
 <% # [DL] Demeter Law is violated here. %>
 <% # We can fix the problem using Decorator pattern and delegates %>
-<% if @clown.last_booking %>
-    <p>Last booking was on <%= @clown.last_booking %></p>
+<% unless @clown.bookings.empty? %>
+    <p>Last booking was on <%= @clown.bookings.last.created_at.strftime('%e.%-m.%Y') %></p>
 <% end %>
 
 <% # [LSP] Remove the conditions once Clown#ranking_data is fixed %>
