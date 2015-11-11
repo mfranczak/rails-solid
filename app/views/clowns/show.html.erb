@@ -18,9 +18,13 @@
 <% end %>
 
 <% # [LSP] Remove the conditions once Clown#ranking_data is fixed %>
-
-<p>Points <span class="badge"><%= @clown.ranking_data.points %></p>
-<p>Bookings <span class="badge"><%= @clown.ranking_data.bookings %></p>
+<% if @clown.ranking_data %>
+    <p>Points <span class="badge"><%= @clown.ranking_data.points %></p>
+    <p>Bookings <span class="badge"><%= @clown.ranking_data.bookings %></p>
+<% else %>
+    <p>Points <span class="badge"><%= (@clown.is_student? ? '10' : '0') %></span></p>
+    <p>Bookings <span class="badge">0</span></p>
+<% end %>
 
 <span class="separator"></span>
 
