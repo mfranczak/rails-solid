@@ -1,4 +1,5 @@
 class Booking < ActiveRecord::Base
+  include ActiveModel::Validations
 
   APPOINTMENT_TIME = ['morning', 'afternoon', 'evening']
 
@@ -8,36 +9,12 @@ class Booking < ActiveRecord::Base
   validates :clown, presence: true
   validates :appointment_date, presence: true
 
-  validate :number_of_appointments_per_day,
-           :already_has_an_appointment,
+  validate :already_has_an_appointment,
            :booking_is_not_in_the_past
 
+  validates_with BookingClownAppointmentsValidator
+
   private
-
-  # Depending on the clowns contract they are not allowed to take more appointments than X a day.
-  #
-  # [SRP]: This business logic should not be placed in the Model class. Extract it to a validator class
-  # http://guides.rubyonrails.org/active_record_validations.html#custom-validators
-  def number_of_appointments_per_day
-    appointment_day = Booking.where(clown: clown, appointment_date: appointment_date).count
-
-    max_per_day = 0
-
-    # [OCP]: This switch is a smell for Open/Closed principle violation.
-    # Adding new rule should not require changing the validator
-    case clown.contract.to_sym
-      when :fulltime
-        max_per_day = 3
-      when :parttime
-        max_per_day = 2
-      when :student
-        max_per_day = 1
-    end
-
-    if appointment_day >= max_per_day
-      errors.add :appointment_date, 'This clown can not have more appointments. Try to change the date.'
-    end
-  end
 
   # [SRP*] Can be moved to a separate validator class.
   def already_has_an_appointment
