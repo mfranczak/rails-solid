@@ -16,9 +16,10 @@
                 <a href="<%= clowns_path %>">SolidClowns</a>
               </h3>
             </div>
+
           </div>
 
-          <div class="inner cover">
+          <div class="inner cover content">
             <% flash.each do |klass, message| %>
                 <div class="alert alert-<%= klass %>" role="alert"><%= message %></div>
             <% end %>
