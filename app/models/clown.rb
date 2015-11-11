@@ -20,7 +20,11 @@ class Clown < ActiveRecord::Base
   #   - Use NullObject pattern when bookings are empty: rules, if a clown is a student he has 10 points
   #   - Remove the condition from views: clowns/show.html.erb
   def ranking_data
-    super unless bookings.empty?
+    if bookings.empty?
+      RankingNoBookings.new self
+    else
+      super
+    end
   end
 
   # Duplicate code:
