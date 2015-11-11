@@ -14,7 +14,13 @@ class Booking < ActiveRecord::Base
 
   validates_with BookingClownAppointmentsValidator
 
+  after_create :after_create_hook
+
   private
+
+  def after_create_hook
+    BookingHook::Resolver.after_create_resolve(self).after_booking(self)
+  end
 
   # [SRP*] Can be moved to a separate validator class.
   def already_has_an_appointment
