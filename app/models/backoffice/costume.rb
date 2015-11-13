@@ -1,5 +1,3 @@
-module Backoffice
-  module Costume
+module Backoffice::Costume
 
-  end
 end

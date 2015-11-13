@@ -1,5 +1,2 @@
-module Backoffice
-  module Base
-
-  end
+module Backoffice::Base
 end

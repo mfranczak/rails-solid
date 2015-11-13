@@ -1,5 +1,3 @@
-module Backoffice
-  module Certificate
+module Backoffice::Certificate
 
-  end
 end
