@@ -1,5 +1,5 @@
 module Backoffice::Certificate
-  include Base
+  include Backoffice::Base
 
   # this method prepares a confirmation certificate for the clown
   def certificate_prepare(booking)

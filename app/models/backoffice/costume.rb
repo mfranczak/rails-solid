@@ -1,5 +1,5 @@
 module Backoffice::Costume
-  include Base
+  include Backoffice::Base
 
   # this method sends a request to borrow a costume for the clown
   def costume_borrow(booking)

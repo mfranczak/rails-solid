@@ -1,9 +1,5 @@
-module BookingHook
-  module AfterCreate
-    class Fulltime
-      def after_booking(booking)
+class BookingHook::AfterCreate::Fulltime
+  def after_booking(booking)
 
-      end
-    end
   end
 end
