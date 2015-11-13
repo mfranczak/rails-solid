@@ -9,13 +9,22 @@ tbd.
 # L - Liskov substitution
 tbd.
 
-# I - Injection of Dependencies
-Original "I" stands for Interface segregation since Ruby is not a strict typed language I followed the idea from http://www.amazon.com/Engineering-Software-Service-Approach-Computing/dp/0984881247 to replace it with Injection of Dependencies.
+# I - Interface Segregation
+tbd.
 
-# D - Demeter Law
-Original "D" stands for Dependency inversion, I covered this principle in "I". The Dependency inversion is replaced with "Demeter Law"
+# D - Dependency injection
+tbd.
 
 About the SolidClowns project
 =============================
 # Features
+tbd.
+
+Extras
+======
+
+# Meta programming
+tbd.
+
+# Law of Demeter
 tbd.
