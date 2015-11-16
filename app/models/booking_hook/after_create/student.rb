@@ -1,9 +1,4 @@
-module BookingHook
-  module AfterCreate
-    class Student
-      def after_booking(booking)
-
-      end
-    end
+class BookingHook::AfterCreate::Student
+  def after_booking(booking)
   end
 end

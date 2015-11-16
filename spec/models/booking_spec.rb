@@ -36,6 +36,7 @@ describe Booking do
 
     context 'when clown is a student' do
       let(:clown) { Clown.new contract: :student }
+      let(:booking) { Booking.new clown: clown, appointment_date: Date.today, appointment_time: :morning }
 
       it {
         allow(clown).to receive(:has_appointment?).and_return false
@@ -47,6 +48,17 @@ describe Booking do
         expect(booking.valid?).to be_falsey
         expect(booking.errors.messages.has_key? :appointment_date)
       }
+
+      it 'should call backoffice' do
+        hook = BookingHook::AfterCreate::Student.new
+        expect(BookingHook::Resolver).to receive(:after_create_resolve).and_return(hook).once
+
+        expect(hook).to receive(:costume_borrow).once
+        expect(hook).to receive(:certificate_prepare).once
+
+        expect(booking.valid?).to be_truthy
+        booking.save
+      end
     end
 
     context 'when clown is partime' do
@@ -75,6 +87,13 @@ describe Booking do
         expect(booking.valid?).to be_falsey
         expect(booking.errors.messages.has_key? :appointment_date)
       }
+
+      it 'should call backoffice' do
+        hook = BookingHook::AfterCreate::Parttime.new
+        expect(BookingHook::Resolver).to receive(:after_create_resolve).and_return(hook).once
+        expect(hook).to receive(:costume_borrow).once
+        booking.save
+      end
     end
   end
 end
