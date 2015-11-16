@@ -12,6 +12,8 @@ class Booking < ActiveRecord::Base
   validate :already_has_an_appointment,
            :booking_is_not_in_the_past
 
+  # The Booking model is configured to use BookingClownAppointmentsValidator as a validator
+  # instead of the number_of_appointments_per_day method.
   validates_with BookingClownAppointmentsValidator
 
   private
@@ -19,7 +21,8 @@ class Booking < ActiveRecord::Base
   # Depending on the clowns contract they are not allowed to take more appointments than X a day.
   #
   # [SRP]: This business logic should not be placed in the Model class. Extract it to a validator class
-  # http://guides.rubyonrails.org/active_record_validations.html#custom-validators
+  # BookingClownAppointmentsValidator and configure the model.
+  # More info: http://guides.rubyonrails.org/active_record_validations.html#custom-validators
   def number_of_appointments_per_day
     appointment_day = Booking.where(clown: clown, appointment_date: appointment_date).count
 
