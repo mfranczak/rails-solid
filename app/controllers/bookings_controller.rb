@@ -13,7 +13,8 @@ class BookingsController < ApplicationController
       #   - check the BookingHook::Resolver and call it from the after_create_hook
       #   - fill the code in BookingHook::AfterCreate::* classes
       #   - each AfterBooking#{@clown.contract} should include the min. amount of methods
-      #   - remove the Backoffice module
+      #   - remove the Backoffice module and clear the controller code
+      #   - make sure the tests are green
       case @booking.clown.contract.to_sym
         when :student
           costume_borrow @booking
