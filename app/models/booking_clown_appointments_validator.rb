@@ -6,6 +6,8 @@ class BookingClownAppointmentsValidator < ActiveModel::Validator
 
     # [OCP]: This switch is a smell for Open/Closed principle violation.
     # Adding new rule should not require changing the validator
+    # Please use the AppointmentsRuleFactory which returns proper validation rule and change the code below.
+    # After the change tests should be still green.
     case booking.clown.contract.to_sym
       when :fulltime
         max_per_day = 3
