@@ -14,13 +14,15 @@ class Clown < ActiveRecord::Base
 
   # [LSP] This method is not a correct substitute for RankingData module.
   # RankingData#ranking_data returns Ranking object when bookings.empty? method returns false which is Boolean
-  # Therefore a condition was implemented in the views
+  # Therefore a condition was implemented in the view: /app/views/clowns/show.html.erb
   #
   # Change this method to be a proper substitute for RankingData#ranking_data
-  #   - Use NullObject pattern when bookings are empty: rules, if a clown is a student he has 10 points
+  #   - Use NullObject pattern (https://en.wikipedia.org/wiki/Null_Object_pattern)
+  #     when bookings are empty: rules, if a clown is a student he has 10 points (RankingNoBooking is the NullObject)
   #   - Remove the condition from views: clowns/show.html.erb
+  #   - Make sure the rspec tests are green
   def ranking_data
-    bookings.empty? ? RankingNoBookings.new(self) : super
+    bookings.empty? ? false : super
   end
 
   # Duplicate code:

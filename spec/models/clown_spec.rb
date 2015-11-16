@@ -15,6 +15,16 @@ describe Clown do
     it '#is_fulltime?' do
       expect(clown.is_fulltime?).to be_falsey
     end
+
+    it '#ranking_data' do
+      expect(clown.ranking_data.is_a? Ranking).to be_truthy
+    end
+
+    # this method should not be here. This is a unit test of a different class.
+    # it's integrated here to check if the task was completed
+    it '#ranking_data points' do
+      expect(clown.ranking_data.points).to eq 10
+    end
   end
 
   context 'parttime' do
@@ -31,6 +41,10 @@ describe Clown do
     it '#is_fulltime?' do
       expect(clown.is_fulltime?).to be_falsey
     end
+
+    it '#ranking_data' do
+      expect(clown.ranking_data.is_a? Ranking).to be_truthy
+    end
   end
 
   context 'fulltime' do
@@ -46,6 +60,18 @@ describe Clown do
 
     it '#is_fulltime?' do
       expect(clown.is_fulltime?).to be_truthy
+    end
+  end
+
+  context 'clown with bookings' do
+    let(:clown) do
+      clown = Clown.new contract: :fulltime
+      clown.bookings << Booking.new
+      clown
+    end
+
+    it '#ranking_data' do
+      expect(clown.ranking_data.is_a? Ranking).to be_truthy
     end
   end
 
