@@ -34,6 +34,6 @@ class BookingsController < ApplicationController
 
   private
   def booking_params
-    params.fetch(:booking).permit(:clown_id, :appointment_date, :appointment_time)
+    params.require(:booking).permit(:clown_id, :appointment_date, :appointment_time)
   end
 end
