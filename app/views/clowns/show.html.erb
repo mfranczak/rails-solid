@@ -11,8 +11,12 @@
 <% end %>
 
 
-<% # [DL] Demeter Law is violated here. %>
+<% # [LOD] Demeter Law is violated here. %>
 <% # We can fix the problem using Decorator pattern and delegates %>
+<% # Check the Presentation::Clown object. %>
+<% # It should decorate a clown object and delegate missing methods to decorated class %>
+<% # Use the Presentation::Clown.last_booking instead of chain of calls inside the template %>
+<% # https://robots.thoughtbot.com/always-define-respond-to-missing-when-overriding %>
 <% unless @clown.bookings.empty? %>
     <p>Last booking was on <%= @clown.bookings.last.created_at.strftime('%e.%-m.%Y') %></p>
 <% end %>
